@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+let clickCount = 0
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
@@ -16,7 +18,10 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-  ipcMain.handle('ping', () => 'hello world')
+  ipcMain.handle('buttonClicked', () => {
+    clickCount += 1
+    return `I clicked this button ${clickCount} times`
+  })
   createWindow()
 
   app.on('activate', () => {

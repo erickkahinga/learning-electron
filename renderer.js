@@ -1,9 +1,10 @@
 const versionInfo = document.getElementById('info')
-versionInfo.innerText = `This app is using Chrome: (v${api.chrome()})\n Node: (v${api.node()})\n Electron: (v${api.electron()}))`
+const button = document.getElementById('btn1')
 
-const func = async () => {
-  const response = await window.api.ping()
-  console.log(response)
-}
+versionInfo.innerText = `This app is using Chrome: (v${api.chrome()})\n Node: (v${api.node()})\n Electron: (v${api.electron()})!`
 
-func()
+button.addEventListener('click', async () => {
+  const message = await api.buttonClicked()
+  console.log(message)
+  versionInfo.innerText = `This app is using Chrome: (v${api.chrome()})\n Node: (v${api.node()})\n Electron: (v${api.electron()})!\n\n${message}`
+})
